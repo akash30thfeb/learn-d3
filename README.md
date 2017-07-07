@@ -9,6 +9,7 @@ Examples, Resources, Links to learn D3
 - [Hide or show and change div background color based on user input](https://jsbin.com/misemix/edit?html,output)
 - [Removing a particular box based on user input](https://jsbin.com/xajohip/edit?html,output)
 - [Barchart - Get values from user via text box](https://jsbin.com/kizinu/edit?html,output)
+- [Interactive dashboard with India Map (state level)](http://htmlpreview.github.io/?https://github.com/skathirmani/learn-d3/blob/master/india_states_map.html)
 
 ### D3 Charts Reference
 - [Vertical barchart](https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4)
