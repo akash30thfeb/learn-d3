@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Elections</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Indian Elections</a>
+      </div>
+      <ul class="nav navbar-nav hidden">
+        <li class="active"><a href="#">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="states-buttons">
+      <div class="btn-group" role="group" aria-label="...">
+      </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-8 col-xs-12 india-map">
+        <svg width="600" height="500" class="svg-india-map"></svg>
+      </div>
+      <div class="col-md-4 col-xs-12">
+        <table class="map-table table">
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>Total Contestants</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-state-name"></td>
+              <td class="td-state-contestants"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="barchart">
+          <svg width="300" height="300" class="svg-barchart"></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/static/js/underscore-min.js"></script>
+<script src="/static/charts/vertical_barchart.js"></script>
+<script type="text/javascript">
+  d3.json('http://projects.datameet.org/maps/data/geojson/states.geojson', function(data){
+    var features = data['features']
+
+    // Create the buttons
+    var states = $.map(features, function(state){
+      var curr_state = state.properties.ST_NM
+      $('.states-buttons .btn-group').append('<button type="button" data-state="'+curr_state+'" class="btn btn-default">'+curr_state+'</button>')
+      return curr_state
+    })
+
+    // Create the map
+    var svg = d3.select('.svg-india-map')
+    var width = svg.attr('width')
+    var height = svg.attr('height')
+
+    var g = svg.append('g')
+
+    var projection = d3.geoMercator()
+                        .scale(500)
+                        .center([78, 20.5])
+                        .translate([width / 2, height / 2])
+
+    var geoPath = d3.geoPath()
+        .projection(projection)
+
+    g.selectAll('path')
+      .data(data.features)
+      .enter()
+      .append('path')
+      .attr('fill', function(){
+        var rand = Math.floor(Math.random() * 20) + 1
+        return d3.schemeCategory20[rand]  
+      })
+      .attr('d', geoPath)
+      .attr('data-state', function(d){
+        return d.properties.ST_NM
+      })
+      .attr('stroke', 'gray')
+  })
+
+  $('body').on('click', '.states-buttons .btn-group [data-state]', function(){
+    var state_selected = $(this).data('state')
+    $('.svg-india-map [data-state]').css('opacity', 0.2)
+    $('.svg-india-map [data-state="'+ state_selected+'"]').css('opacity', 1)
+    $('.svg-india-map [data-state="'+state_selected+'"]').trigger('click')
+  })
+
+  $('body').on('click', '.svg-india-map [data-state]', function(){
+    var state_contestants = {'Karnataka': 1000,
+                             'Tamil Nadu': 500,
+                             'Kerala': 900}
+                              
+    var data = {'Tamil Nadu':
+                  [{'pc': 'Chennai', 'contestants':90},
+                   {'pc': 'Madurai', 'contestants':100},
+                   {'pc': 'Coimbatore', 'contestants':80}],
+                'Karnataka':
+                  [{'pc': 'K1', 'contestants':190},
+                   {'pc': 'K2', 'contestants':200},
+                   {'pc': 'K3', 'contestants':40}]
+                }
+
+    var state_selected = $(this).data('state')
+    data_state = data[state_selected]
+    $('.svg-barchart').empty()
+    draw_vertical_barchart(data_state, '.svg-barchart', 'pc', 'contestants')
+    $('.td-state-name').html('')
+    $('.td-state-contestants').html('')
+    $('.td-state-name').html(state_selected)
+    $('.td-state-contestants').html(state_contestants[state_selected])
+  })
+
+</script>
+</body>
+</html>
