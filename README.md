@@ -29,9 +29,4 @@ Examples, Resources, Links to learn D3
 
 
 ### Contact me
-- My email id: kathirmani@quelit.com
-- You can reach out to me for the following
-  - To collaborate
-  - If you have any doubts
-  - If you are in need of data set (as of now i am sharing the data sets for non commercial purposes only)
-  - If you want to engage with me for training
+- You can reach out to me via my email: kathirmani@quelit.com
