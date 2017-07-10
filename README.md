@@ -24,3 +24,14 @@ Examples, Resources, Links to learn D3
 
 ### Data Sources
 - [India state level map GeoJSON](http://projects.datameet.org/maps/data/geojson/states.geojson)
+- India Parliament Elections Data (please write to me)
+- ODI Runs data (please write to me)
+
+
+### Contact me
+- My email id: kathirmani@quelit.com
+- You can reach out to me for the following
+  - To collaborate
+  - If you have any doubts
+  - If you are in need of data set (as of now i am sharing the data sets for non commercial purposes only)
+  - If you want to engage with me for training
