@@ -21,6 +21,7 @@ Examples, Resources, Links to learn D3
 - [Get started with HTML, CSS, Javascript](https://www.freecodecamp.com/)
 - [Convert GeoJSON to TopoJSON](mapshaper.org)
 - [Bootstrap Components](http://getbootstrap.com/components/)
+- [Mapping with D3](http://maptimeboston.github.io/d3-maptime/#/)
 
 ### Data Sources
 - [India state level map GeoJSON](http://projects.datameet.org/maps/data/geojson/states.geojson)
